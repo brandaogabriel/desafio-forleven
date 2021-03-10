@@ -3,8 +3,11 @@ package com.devgabriel.challengeforleven.services;
 import com.devgabriel.challengeforleven.dtos.StudentDTO;
 import com.devgabriel.challengeforleven.entities.Student;
 import com.devgabriel.challengeforleven.repositories.StudentRepository;
+import com.devgabriel.challengeforleven.services.exceptions.DatabaseException;
 import com.devgabriel.challengeforleven.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +58,16 @@ public class StudentService {
       return new StudentDTO(student);
     } catch (EntityNotFoundException e) {
       throw new ResourceNotFoundException("Student not found");
+    }
+  }
+
+  public void delete(String enrollment) {
+    try {
+      repository.deleteById(enrollment);
+    } catch (EmptyResultDataAccessException e) {
+      throw new ResourceNotFoundException("Enrollment not found");
+    } catch (DataIntegrityViolationException e) {
+      throw new DatabaseException("Integrity violation");
     }
   }
 

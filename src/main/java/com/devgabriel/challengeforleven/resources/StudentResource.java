@@ -42,4 +42,10 @@ public class StudentResource {
     dto = service.update(enrollment, dto);
     return ResponseEntity.ok().body(dto);
   }
+
+  @DeleteMapping(value = "/{enrollment}")
+  public ResponseEntity<Void> deleteByEnrollment(@PathVariable String enrollment) {
+    service.delete(enrollment);
+    return ResponseEntity.noContent().build();
+  }
 }
