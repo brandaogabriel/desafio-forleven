@@ -4,11 +4,10 @@ import com.devgabriel.challengeforleven.dtos.StudentDTO;
 import com.devgabriel.challengeforleven.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,5 +27,19 @@ public class StudentResource {
   public ResponseEntity<StudentDTO> findByEnrollment(@PathVariable String enrollment) {
     StudentDTO studentDto = service.findByEnrollment(enrollment);
     return ResponseEntity.ok().body(studentDto);
+  }
+
+  @PostMapping
+  public ResponseEntity<StudentDTO> insert(@RequestBody StudentDTO dto) {
+    dto = service.insert(dto);
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{enrollment}")
+            .buildAndExpand(dto.getEnrollment()).toUri();
+    return ResponseEntity.created(uri).body(dto);
+  }
+
+  @PutMapping(value = "/{enrollment}")
+  public ResponseEntity<StudentDTO> update(@PathVariable String enrollment, @RequestBody StudentDTO dto) {
+    dto = service.update(enrollment, dto);
+    return ResponseEntity.ok().body(dto);
   }
 }
