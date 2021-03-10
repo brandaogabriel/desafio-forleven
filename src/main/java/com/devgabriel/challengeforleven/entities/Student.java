@@ -1,5 +1,6 @@
 package com.devgabriel.challengeforleven.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,6 +14,7 @@ public class Student implements Serializable {
 
   @Id
   private String enrollment;
+
   private String name;
   private String lastName;
 

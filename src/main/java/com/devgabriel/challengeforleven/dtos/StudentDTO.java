@@ -2,36 +2,32 @@ package com.devgabriel.challengeforleven.dtos;
 
 import com.devgabriel.challengeforleven.entities.Student;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class StudentDTO implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private String enrollment;
+  @NotBlank(message = "Name field is required")
+  @Size(min = 4, message = "Name field must have at least 4 characters")
   private String name;
+
+  @NotBlank(message = "Last name field is required")
+  @Size(min = 4, message = "Last name field must have ate least 4 characters")
   private String lastName;
 
   public StudentDTO() {
   }
 
-  public StudentDTO(String enrollment, String name, String lastName) {
-    this.enrollment = enrollment;
+  public StudentDTO(String name, String lastName) {
     this.name = name;
     this.lastName = lastName;
   }
 
   public StudentDTO(Student entity) {
-    enrollment = entity.getEnrollment();
     name = entity.getName();
     lastName = entity.getLastName();
-  }
-
-  public String getEnrollment() {
-    return enrollment;
-  }
-
-  public void setEnrollment(String enrollment) {
-    this.enrollment = enrollment;
   }
 
   public String getName() {
