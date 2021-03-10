@@ -1,11 +1,10 @@
 package com.devgabriel.challengeforleven.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_student")
@@ -17,6 +16,10 @@ public class Student implements Serializable {
 
   private String name;
   private String lastName;
+
+  @OneToMany
+  @JoinColumn(name = "student_enrollment")
+  private Set<Phone> phoneNumbers = new HashSet<>();
 
   public Student() {
   }
@@ -49,6 +52,10 @@ public class Student implements Serializable {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public Set<Phone> getPhoneNumbers() {
+    return phoneNumbers;
   }
 
   @Override

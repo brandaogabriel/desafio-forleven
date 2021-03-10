@@ -1,9 +1,12 @@
 package com.devgabriel.challengeforleven.services;
 
+import com.devgabriel.challengeforleven.dtos.PhoneDTO;
 import com.devgabriel.challengeforleven.dtos.StudentDTO;
 import com.devgabriel.challengeforleven.dtos.StudentInsertDTO;
 import com.devgabriel.challengeforleven.dtos.StudentUpdateDTO;
+import com.devgabriel.challengeforleven.entities.Phone;
 import com.devgabriel.challengeforleven.entities.Student;
+import com.devgabriel.challengeforleven.repositories.PhoneRepository;
 import com.devgabriel.challengeforleven.repositories.StudentRepository;
 import com.devgabriel.challengeforleven.services.exceptions.DatabaseException;
 import com.devgabriel.challengeforleven.services.exceptions.ResourceNotFoundException;
@@ -23,6 +26,9 @@ public class StudentService {
 
   @Autowired
   private StudentRepository repository;
+
+  @Autowired
+  private PhoneRepository phoneRepository;
 
   @Transactional(readOnly = true)
   public List<StudentInsertDTO> findAll() {
@@ -49,6 +55,13 @@ public class StudentService {
   private void copyDtoToEntity(Student student, StudentDTO studentDTO) {
     student.setName(studentDTO.getName());
     student.setLastName(studentDTO.getLastName());
+
+    student.getPhoneNumbers().clear();
+    for(PhoneDTO dto : studentDTO.getPhoneNumbers()) {
+      Phone phone = new Phone(null, dto.getPhoneNumber());
+      phone = phoneRepository.save(phone);
+      student.getPhoneNumbers().add(phone);
+    }
   }
 
   @Transactional

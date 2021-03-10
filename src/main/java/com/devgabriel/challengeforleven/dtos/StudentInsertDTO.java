@@ -19,9 +19,8 @@ public class StudentInsertDTO extends StudentDTO {
   }
 
   public StudentInsertDTO(Student entity) {
+    super(entity);
     enrollment = entity.getEnrollment();
-    super.setName(entity.getName());
-    super.setLastName(entity.getLastName());
   }
 
   public String getEnrollment() {

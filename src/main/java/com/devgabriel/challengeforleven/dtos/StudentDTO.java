@@ -5,6 +5,8 @@ import com.devgabriel.challengeforleven.entities.Student;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDTO implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -17,6 +19,8 @@ public class StudentDTO implements Serializable {
   @Size(min = 4, message = "Last name field must have ate least 4 characters")
   private String lastName;
 
+  private List<PhoneDTO> phoneNumbers = new ArrayList<>();
+
   public StudentDTO() {
   }
 
@@ -28,6 +32,7 @@ public class StudentDTO implements Serializable {
   public StudentDTO(Student entity) {
     name = entity.getName();
     lastName = entity.getLastName();
+    entity.getPhoneNumbers().forEach(phone -> this.phoneNumbers.add(new PhoneDTO(phone)));
   }
 
   public String getName() {
@@ -44,5 +49,9 @@ public class StudentDTO implements Serializable {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public List<PhoneDTO> getPhoneNumbers() {
+    return phoneNumbers;
   }
 }
