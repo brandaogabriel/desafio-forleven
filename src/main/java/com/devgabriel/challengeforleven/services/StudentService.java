@@ -27,7 +27,7 @@ public class StudentService {
   @Transactional(readOnly = true)
   public List<StudentInsertDTO> findAll() {
     List<Student> students = repository.findAll();
-    return students.stream().map(student -> new StudentInsertDTO(student)).collect(Collectors.toList());
+    return students.stream().map(StudentInsertDTO::new).collect(Collectors.toList());
   }
 
   @Transactional(readOnly = true)
