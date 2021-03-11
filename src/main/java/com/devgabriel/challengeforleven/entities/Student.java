@@ -17,7 +17,7 @@ public class Student implements Serializable {
   private String name;
   private String lastName;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "student_enrollment")
   private Set<Phone> phoneNumbers = new HashSet<>();
 

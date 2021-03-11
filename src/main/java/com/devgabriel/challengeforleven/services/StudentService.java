@@ -53,15 +53,23 @@ public class StudentService {
   }
 
   private void copyDtoToEntity(Student student, StudentDTO studentDTO) {
+    removePhoneNumbers(student);
+
     student.setName(studentDTO.getName());
     student.setLastName(studentDTO.getLastName());
 
-    student.getPhoneNumbers().clear();
     for(PhoneDTO dto : studentDTO.getPhoneNumbers()) {
       Phone phone = new Phone(null, dto.getPhoneNumber());
       phone = phoneRepository.save(phone);
       student.getPhoneNumbers().add(phone);
     }
+  }
+
+  private void removePhoneNumbers(Student student) {
+    for (Phone phone : student.getPhoneNumbers())
+      phoneRepository.deleteById(phone.getId());
+
+    student.getPhoneNumbers().clear();
   }
 
   @Transactional
