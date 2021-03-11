@@ -37,13 +37,13 @@ public class StudentResource {
     StudentDTO studentDto = service.insert(dto);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{enrollment}")
             .buildAndExpand(dto.getEnrollment()).toUri();
-    return ResponseEntity.created(uri).body(dto);
+    return ResponseEntity.created(uri).body(studentDto);
   }
 
   @PutMapping(value = "/{enrollment}")
   public ResponseEntity<StudentDTO> update(@PathVariable String enrollment, @Valid @RequestBody StudentUpdateDTO dto) {
     StudentDTO studentDto = service.update(enrollment, dto);
-    return ResponseEntity.ok().body(dto);
+    return ResponseEntity.ok().body(studentDto);
   }
 
   @DeleteMapping(value = "/{enrollment}")
