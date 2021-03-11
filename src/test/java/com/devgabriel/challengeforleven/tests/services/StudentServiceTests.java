@@ -49,7 +49,7 @@ class StudentServiceTests {
     nonExistingEnrollment = "6789";
     dependingEnrollment = "3456";
     student = StudentFactory.createStudent();
-    newStudentInsertDTO = StudentFactory.createStudentInsert();
+    newStudentInsertDTO = StudentFactory.createStudentInsertDTO();
     Phone phone = PhoneFactory.createPhone();
 
     Mockito.when(repository.findAll()).thenReturn(List.of(student));

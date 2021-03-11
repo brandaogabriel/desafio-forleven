@@ -1,5 +1,6 @@
 package com.devgabriel.challengeforleven.tests.factory;
 
+import com.devgabriel.challengeforleven.dtos.StudentDTO;
 import com.devgabriel.challengeforleven.dtos.StudentInsertDTO;
 import com.devgabriel.challengeforleven.dtos.StudentUpdateDTO;
 import com.devgabriel.challengeforleven.entities.Phone;
@@ -13,6 +14,10 @@ public class StudentFactory {
     return student;
   }
 
+  public static StudentDTO createStudentDTO() {
+    return new StudentDTO(createStudent());
+  }
+
   public static StudentUpdateDTO createStudentUpdateDTO() {
     StudentUpdateDTO dto = new StudentUpdateDTO();
     Student student = createStudent();
@@ -21,7 +26,7 @@ public class StudentFactory {
     return dto;
   }
 
-  public static StudentInsertDTO createStudentInsert() {
+  public static StudentInsertDTO createStudentInsertDTO() {
     Student student = createStudent();
     return new StudentInsertDTO(student);
   }

@@ -36,7 +36,7 @@ class StudentServiceIT {
     nonExistingEnrollment = "6789";
     countTotalStudents = 5L;
     existingStudent = StudentFactory.createStudentUpdateDTO();
-    newStudentInsertDTO = StudentFactory.createStudentInsert();
+    newStudentInsertDTO = StudentFactory.createStudentInsertDTO();
     expectedStudentName = "Jacob";
   }
 
