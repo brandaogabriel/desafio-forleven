@@ -4,11 +4,9 @@ A api foi desenvolvida como um teste para a Forleven.
 
 A api permite cadastrar, listar, editar e remover estudantes. 
 
-A implantação da api foi feita utilizando a AWS, com os serviços EC2 e RDS.
+A implantação da api foi feita o heroku.
 
-**Em um futuro próximo, irei transferir para o heroku**
-
-- Link do back end: http://ec2-54-94-193-95.sa-east-1.compute.amazonaws.com/students
+- Link do back end: https://forleven-test.herokuapp.com/students
 
 ## 🔌 Configurações para inicialização
 - **Você precisa ter o java jdk 11 instalado na sua máquina bem como o `PATH_VARIABLE` do
